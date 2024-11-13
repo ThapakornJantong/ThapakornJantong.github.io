@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('head').load('head.html');
+      $('#body').load('body.html');
+    })
+
+
+    sid = []
+    sname = []
+    dept = []
+
+    if (localStorage.getItem('sid') != null &&
+      localStorage.getItem('sname') != null &&
+      localStorage.getItem('dept') != null) {
+
+      sid = JSON.parse(localStorage.getItem('sid'))
+      sname = JSON.parse(localStorage.getItem('sname'))
+      dept = JSON.parse(localStorage.getItem('dept'))
+
+    }
+
+  </script>
+
+
+</head>
+
+<body>
+  <div id="body"></div>
+
+  <div class="container d-flex flex-wrap justify-content-center gap-5 mt-5">
+    <div class="card" style="width: 50rem;">
+      <img src="https://i.pinimg.com/564x/51/2d/68/512d686a69739ad234416c518e5447a0.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Student system</h5>
+        <p class="card-text">
+        <div class="form-floating mb-3">
+          <input type="number" id="sid" class="form-control" placeholder />
+          <label for="text">Id</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" id="sname" class="form-control" placeholder />
+          <label for="text">Fullname</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select class="form-select" id="dept" aria-label="Default select example">
+            <option selected>Choose Department</option>
+            <option value="ช่างกลโรงงาน">ช่างกลโรงงาน</option>
+            <option value="ช่างยนต์">ช่างยนต์</option>
+            <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
+          </select>
+        </div>
+
+
+        </p>
+        <div>
+          <button class="btn btn-primary w-25" type="submit" onclick="click_submit()">Submit</button>
+          <button class="btn btn-secondary w-25" type="reset" onclick="clear_data()">Reset</button>
+          <br>
+          <table class="table table-bordered mt-5 border-dark border border-3 table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ชื่อ-สกุล</th>
+                <th scope="col">แผนกวิชา</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <script>
+                for (let i = 0; i < sid.length;i++) {
+                  document.write('<tr>')
+                    document.write('<td>' + sid[i] + '</td>');
+                    document.write('<td>' + sname[i] + '</td>');
+                    document.write('<td>' + dept[i] + '</td>');
+                    document.write('</tr>')
+                  
+               } </script>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+
+
+
+
+
+    console.log('sid = ' + sid)
+    console.log('sname = ' + sname)
+    console.log('dept = ' + dept)
+
+    function click_submit() {
+
+      sid.push(document.getElementById('sid').value)
+      sname.push(document.getElementById('sname').value)
+      dept.push(document.getElementById('dept').value)
+
+      localStorage.setItem('sid', JSON.stringify(sid))
+      localStorage.setItem('sname', JSON.stringify(sname))
+      localStorage.setItem('dept', JSON.stringify(dept))
+
+      // clear_data()
+      location.href='page1.html'
+    }
+    function clear_data() {
+
+      document.getElementById('sid').value = ''
+      document.getElementById('sname').value = ''
+      document.getElementById('dept').selectedIndex = 0
+
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
